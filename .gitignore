@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+RisadWebApi.sln.DotSettings.user
+/_ReSharper.Caches/
+**/.idea/workspace.xml
+.idea/*
+/**/.idea/*
+.vs/
