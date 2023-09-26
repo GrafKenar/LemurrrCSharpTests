@@ -19,6 +19,12 @@ namespace Baucenter
             return elements[randomIndex];
         }
 
+        public static IWebElement SelectElement(this IList<IWebElement> elements, string elementText)
+        {
+            IWebElement element = elements.First(x => x.Text.Contains(elementText));
+            return element;
+        }
+
         public static Func<IWebDriver, IList<IWebElement>> VisibilityOfAllElementsLocated(IList<IWebElement> elements)
         {
             return delegate (IWebDriver driver)
@@ -36,6 +42,50 @@ namespace Baucenter
                 catch (StaleElementReferenceException)
                 {
                     return null;
+                }
+            };
+        }
+
+        private static IWebElement ElementIfVisible(IWebElement element)
+        {
+            if (!element.Displayed)
+            {
+                return null;
+            }
+
+            return element;
+        }
+
+        public static Func<IWebDriver, IWebElement> ElementIsVisible(IWebElement element)
+        {
+            return delegate (IWebDriver driver)
+            {
+                try
+                {
+                    return ElementIfVisible(element);
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
+
+        public static Func<IWebDriver, bool> InvisibilityOfElementLocated(IWebElement element)
+        {
+            return delegate (IWebDriver driver)
+            {
+                try
+                {
+                    return !element.Displayed;
+                }
+                catch (NoSuchElementException)
+                {
+                    return true;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return true;
                 }
             };
         }

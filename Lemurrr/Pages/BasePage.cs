@@ -54,7 +54,5 @@ namespace Baucenter.Pages
 
             return wait.Until(AdditionalMethods.VisibilityOfAllElementsLocated(element));
         }
-
-
     }
 }

@@ -34,7 +34,6 @@ namespace Baucenter.Pages
 
         public void checkThatCorrectProductInCart()
         {
-            Thread.Sleep(2000);
             Assert.AreEqual(_price, wait(totalPriceValue).Text);
             Assert.AreEqual(_title, wait(productTitleValue).Text.ToUpper());
         }

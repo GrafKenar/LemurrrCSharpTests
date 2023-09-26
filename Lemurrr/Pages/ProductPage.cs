@@ -43,7 +43,6 @@ namespace Baucenter.Pages
 
         public CartPage addProductToCartAndGoToCart()
         {
-
             _driver.ExecuteJavaScript("$('[class=\"city-confirmation__modal\"]').remove()");
             wait(addProductToCartButton).Click();
             cartDropdownButton.Click();

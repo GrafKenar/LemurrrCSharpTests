@@ -24,15 +24,15 @@ namespace Baucenter.Pages
         [FindsBy(How.Id, "topmenu-btn")]
         public IWebElement catalogButton { get; set; }
 
+        //[FindsBy(How.Id, "anElementName", Priority = 0)]
+        //[FindsBy(How.CssSelector, "ul > li", Priority = 1)]
+        //public IList<IWebElement> sectionButtons { get; set; }
+
         [FindsBy(How.CssSelector, "#topmenu > ul > li")]
         public IList<IWebElement> sectionButtons { get; set; }
 
         [FindsBy(How.CssSelector, ".hover > div > ul > li > ul > li > a")]
         public IList<IWebElement?> subSectionButtons { get; set; }
-
-        //[FindsBy(How = How.Name, Using = "anElementName", Priority = 0)]
-        //[FindsBy(How = How.Name, Using = "differentElementName", Priority = 1)]
-        //public IWebElement thisElement;
 
         public ListOfProductsPage goToRandomProgductSection()
         {
@@ -42,6 +42,22 @@ namespace Baucenter.Pages
             IWebElement sectionsMenuItem = randomElement(elements.GetRange(0, 5));
             action.MoveToElement(sectionsMenuItem).Perform();
             randomElement(subSectionButtons).Click();
+
+            return new ListOfProductsPage(_driver);
+        }
+
+        public ListOfPromotionsPage GoToPromotionsPage()
+        {
+            catalogButton.Click();
+            sectionButtons.SelectElement("Акции").Click();
+
+            return new ListOfPromotionsPage(_driver);
+        }
+
+        public ListOfProductsPage GoToAllProductsPage()
+        {
+            catalogButton.Click();
+            sectionButtons.SelectElement("Все товары").Click();
 
             return new ListOfProductsPage(_driver);
         }
